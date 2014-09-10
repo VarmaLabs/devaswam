@@ -1,0 +1,62 @@
+
+<%# Displays a detailed view of the admin %>
+<%# Display Flash Message if any only in case of ajax request %>
+<% if request.xhr? %>
+	<%= render :partial=>"layouts/common/flash_message" %>
+<% end %>
+
+<div class="box p-10">
+
+  <div class="row">
+    <div class="col-md-3">
+      <%= display_image(@admin, :photo, "100%") %>
+    </div>
+
+    <div class="col-md-9">
+      <div class="heading1"><%= @admin.name %></div>
+      <div class="heading2"><%= @admin.trust.name if @admin.trust %></div>
+    </div>
+  </div>
+
+  <table class="table table-condensed table-hover table-striped mt-20">
+    <tbody>
+      <tr>
+        <td class="bold" style="width:30%;">Username</td>
+        <td><%= @admin.username.blank? ? "-" : @admin.username %></td>
+      </tr>
+      <tr>
+        <td class="bold" style="width:30%;">Email</td>
+        <td><%= @admin.email.blank? ? "-" : @admin.email %></td>
+      </tr>
+      <tr>
+        <td class="bold" style="width:30%;">Phone</td>
+        <td><%= @admin.phone.blank? ? "-" : @admin.phone %></td>
+      </tr>
+      <tr>
+        <td class="bold" style="width:30%;">Address</td>
+        <td><%= @admin.address.blank? ? "-" : @admin.address %></td>
+      </tr>
+      <tr>
+        <td class="bold" style="width:30%;">Status</td>
+        <td><%= @admin.status %></td>
+      </tr>
+      <tr>
+        <td class="bold" style="width:30%;">Created at</td>
+        <td><%= display_time(@admin.created_at, "text-color-grey") %></td>
+      </tr>
+      <tr>
+        <td class="bold" style="width:30%;">Last updated at</td>
+        <td><%= display_time(@admin.updated_at, "text-color-grey") %></td>
+      </tr>
+    </tbody>
+  </table>
+
+	<div class="cl-20"></div>
+
+  <div class="palette-footer ml-10">
+    <%= link_to raw("<i class=\"icon-pencil icon-white mr--5\"></i> Edit"), edit_super_admin_admin_path(@admin), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
+    <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), super_admin_admin_path(@admin), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right", :remote=>true %>
+    <div class="cl-10"></div>
+  </div>
+
+</div>

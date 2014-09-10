@@ -1,0 +1,25 @@
+<% if @trust.errors.blank? %>
+	
+	// Fill the right box with first trust details
+	$('#div_trust_details').html("<%= escape_javascript(render(:partial=>'show')) %>");
+	
+	// Add the newly created item to the list
+  $("#div_trust_collections").prepend("<div id=\"div_trust_<%= @trust.id %>\"><%= escape_javascript(render(:partial => 'item', :locals => { :trust => @trust })) %></div>")
+  $("#div_trust_empty").hide();
+  
+  // Close Modal
+  closeModal();
+
+<% else %>
+	
+  // Show the new form in the pop up form.
+  heading = "Create Trust";
+  bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
+  showModal(heading, bodyContent);
+  validateTrustForm();
+  
+  // Populate Server Side Errors
+  errorMessages = <%= @trust.errors.full_messages.to_json.html_safe %>;
+  populateServerSideErrors('trust', errorMessages);
+	
+<% end %>

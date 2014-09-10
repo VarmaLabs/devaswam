@@ -1,0 +1,23 @@
+<%# describes about each trust %>
+<div class="box hoverable p-10 box-border-black">
+
+  <div class="row">
+    <div class="col-md-3 visible-md visible-lg">
+      <%= display_image(trust, :photo, "100%") %>
+    </div>
+    <div class="col-md-9">
+      <%= link_to trust.name, super_admin_trust_path(trust),
+          :remote=>true, :class=>"heading3" %><br/>
+
+      <div class="content"><%= scrap_word(trust.description, 100) %></div>
+
+      <div class="mt-10 pull-right text-color-gray fs-11 visible-md visible-lg">
+        <%= display_time(trust.created_at) %>
+      </div>
+  	</div>
+  </div>
+
+  <div class="cl"></div>
+
+</div>
+

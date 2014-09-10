@@ -1,0 +1,12 @@
+<div class="btn-group mt-10 mb-10" style="width:100%;">
+  <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">
+    Choose a Trust <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <% @trusts.each do |trust| %>
+      <li><%= link_to trust.name, super_admin_trust_path(trust), :remote=>true %></li>
+    <% end %>
+    <%= content_tag :li, link_to_next_page(@trusts, 'Next Page', :remote => true) %>
+    <%= content_tag :li, link_to_previous_page(@trusts, 'Previous Page', :remote => true) %>
+  </ul>
+</div>

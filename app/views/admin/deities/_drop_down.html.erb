@@ -1,0 +1,12 @@
+<div class="btn-group mt-10 mb-10" style="width:100%;">
+  <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">
+    Choose a Deity <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <% @deities.each do |deity| %>
+      <li><%= link_to deity.name, admin_deity_path(deity), :remote=>true %></li>
+    <% end %>
+    <%= content_tag :li, link_to_next_page(@deities, 'Next Page', :remote => true) %>
+    <%= content_tag :li, link_to_previous_page(@deities, 'Previous Page', :remote => true) %>
+  </ul>
+</div>
