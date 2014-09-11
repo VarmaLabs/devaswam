@@ -1,4 +1,4 @@
-class Admin < ActiveRecord::Base
+class SuperAdmin < ActiveRecord::Base
 
   has_secure_password
 
@@ -19,8 +19,6 @@ class Admin < ActiveRecord::Base
       :maximum => ConfigCenter::GeneralValidations::USERNAME_MAX_LEN},
       :format => {:with => ConfigCenter::GeneralValidations::USERNAME_FORMAT_REG_EXP}
 
-  validates :status, :presence=> true, :inclusion => { :in => ConfigCenter::Admin::STATUS_LIST.keys }
-
   validates :email,
     :presence => true,
     :uniqueness => {:case_sensitive => false},
@@ -31,35 +29,6 @@ class Admin < ActiveRecord::Base
    :format => {:with => ConfigCenter::GeneralValidations::PASSWORD_FORMAT_REG_EXP},
    unless: Proc.new { |admin| admin.password.blank? }
 
-  validates :trust, presence: true
-
-  # Associations
-  belongs_to :trust
-
-  state_machine :status, :initial => :inactive do
-
-    event :activate do
-      transition :inactive => :active
-    end
-
-    event :block do
-      transition :all => :blocked
-    end
-
-    event :unblock do
-      transition :blocked => :active
-    end
-
-    event :lock_account do
-      transition :all => :locked
-    end
-
-    event :unlock do
-      transition :locked => :active
-    end
-
-  end
-
   # return an active record relation object with the search query in its where clause
   # Return the ActiveRecord::Relation object
   # == Examples
@@ -68,10 +37,7 @@ class Admin < ActiveRecord::Base
   scope :search, lambda {|query| where("
                                             LOWER(name) LIKE LOWER('%#{query}%') OR\
                                             LOWER(username) LIKE LOWER('%#{query}%') OR\
-                                            LOWER(status) LIKE LOWER('%#{query}%') OR\
-                                            LOWER(email) LIKE LOWER('%#{query}%') OR\
-                                            LOWER(phone) LIKE LOWER('%#{query}%') OR\
-                                            LOWER(address) LIKE LOWER('%#{query}%')")
+                                            LOWER(email) LIKE LOWER('%#{query}%') OR")
                         }
 
   # FIX ME - Specs need to be written
@@ -87,16 +53,9 @@ class Admin < ActiveRecord::Base
   def as_json(options={})
     exclusion_list = []
     exclusion_list += ConfigCenter::Defaults::EXCLUDED_JSON_ATTRIBUTES
-    exclusion_list += ConfigCenter::Admin::EXCLUDED_JSON_ATTRIBUTES
+    exclusion_list += ConfigCenter::SuperAdmin::EXCLUDED_JSON_ATTRIBUTES
     options[:except] ||= exclusion_list
     super(options)
   end
-
-  def display_status
-    ConfigCenter::Admin::STATUS_LIST[status]
-  end
-
-
-  include StateMachinesScopes
 
 end

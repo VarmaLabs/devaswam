@@ -36,7 +36,7 @@ class Trust < ActiveRecord::Base
       transition :blocked => :active
     end
 
-    event :lock do
+    event :lock_account do
       transition :all => :locked
     end
 

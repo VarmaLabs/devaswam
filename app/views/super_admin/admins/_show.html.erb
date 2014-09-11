@@ -8,13 +8,13 @@
 <div class="box p-10">
 
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3" style="padding-left:0px;padding-right:0px">
       <%= display_image(@admin, :photo, "100%") %>
     </div>
 
     <div class="col-md-9">
       <div class="heading1"><%= @admin.name %></div>
-      <div class="heading2"><%= @admin.trust.name if @admin.trust %></div>
+      <div><%= link_to @admin.trust.name, super_admin_trust_path(@admin.trust), :class=>"text-color-red" if @admin.trust %><br/></div>
     </div>
   </div>
 
