@@ -10,7 +10,7 @@
     <%= render :partial=>"/layouts/common/meta_tags" -%>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="icon" href="/assets/favicon.ico" type="image/png">
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
 
     <%= stylesheet_link_tag "application", :media => "all" -%>
 
@@ -37,7 +37,7 @@
     </div>
 
 		<%#* Show flash messages if controller has set any. -%>
-		<div id="div_flash_message">
+		<div id="div_flash_message" class="container" >
 			<%= render :partial=>"/layouts/common/flash_message" -%>
 		</div>
 

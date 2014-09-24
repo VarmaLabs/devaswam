@@ -1,0 +1,25 @@
+<div class="well pull-left">
+  <%= form_tag super_admin_create_session_path, :role=>"form", :autocomplete => :off do %>
+
+    <h2>Login in as super admin</h2>
+
+    <div class="form-group margin-top-30">
+      <label for="sign_in_login_handle">Email address</label>
+      <%= text_field_tag :login_handle, params[:login_handle], :placeholder=> "Enter Username / Emails", :name => "login_handle", :class=>"form-control", id: "sign_in_login_handle" %>
+    </div>
+    <div class="form-group">
+      <label for="sign_in_password">Password</label>
+      <%= password_field_tag :password, '', :placeholder=> "Enter Password", :name => "password", :class=>"form-control", id: "sign_in_password" %>
+    </div>
+
+    <%= submit_tag "Sign in", :class => "btn btn-primary" %>
+  <% end %>
+</div>
+
+<!-- <img class="pull-right visible-lg" alt="devaswam" src="http://www.kerala.com/kerala_destinations/images/guruvayoor.jpg"> -->
+<!-- <img class="hidden-lg" style="width:100%" alt="devaswam" src="http://www.kerala.com/kerala_destinations/images/guruvayoor.jpg"> -->
+
+<div class="cl"></div>
+
+
+

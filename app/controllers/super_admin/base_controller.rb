@@ -18,20 +18,20 @@ class SuperAdmin::BaseController < ApplicationController
       @heading = translate("authentication.error")
       @alert = translate("authentication.invalid_token")
       store_flash_message("#{@heading}: #{@alert}", :errors)
-      redirect_to sign_in_url
+      redirect_to super_admin_sign_in_url
     end
   end
 
   def redirect_url_if_sign_in_fails
-    sign_in_url
+    super_admin_sign_in_url
   end
 
   def redirect_url_after_sign_in
-    home_url
+    super_admin_home_url
   end
 
   def redirect_url_after_sign_out
-    sign_in_url
+    super_admin_sign_in_url
   end
 
   def redirect_if_signed_in

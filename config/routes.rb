@@ -12,6 +12,13 @@ Rails.application.routes.draw do
     resources :temples
   }
 
+  # Sign In URLs for super admin users
+  get     'super_admin/sign_in'         => "super_admin/sessions#sign_in",         :as => :super_admin_sign_in
+  post    'super_admin/create_session'  => "super_admin/sessions#create_session",  :as => :super_admin_create_session
+  delete  'super_admin/sign_out'        => "super_admin/sessions#sign_out",        :as => :super_admin_sign_out
+
+  get     'super_admin/home'           => "super_admin/home#index",                :as => :super_admin_home
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
