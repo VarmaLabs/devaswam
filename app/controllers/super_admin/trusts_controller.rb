@@ -1,8 +1,7 @@
 class SuperAdmin::TrustsController < SuperAdmin::BaseController
 
-  #before_filter :require_user
-  #authorize_actions_for Item, :actions => {:index => :delete}
-  before_filter :set_navs, :parse_pagination_params, :only=>:index
+  before_filter :parse_pagination_params, :only=>:index
+  before_filter :set_navs
 
   # GET /trusts
   # GET /trusts.js
@@ -185,7 +184,7 @@ class SuperAdmin::TrustsController < SuperAdmin::BaseController
       relation = relation.search(@query) if !@query.blank?
     end
 
-    @trusts = relation.order("created_at desc").page(@current_page).per(@per_page)
+    @trusts = relation.order("created_at asc").page(@current_page).per(@per_page)
 
     ## Initializing the @trust object so that we can render the show partial
     @trust = @trusts.first unless @trust

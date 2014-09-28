@@ -1,6 +1,7 @@
 class SuperAdmin::AdminsController < SuperAdmin::BaseController
 
-  before_filter :set_navs, :parse_pagination_params, :only=>:index
+  before_filter :parse_pagination_params, :only=>:index
+  before_filter :set_navs
 
   # GET /admins
   # GET /admins.js
@@ -35,6 +36,10 @@ class SuperAdmin::AdminsController < SuperAdmin::BaseController
   def new
     ## Intitializing the admin object
     @admin = Admin.new
+    if params[:trust_id]
+      @trust = Trust.find_by_id(params[:trust_id])
+      @admin.trust = @trust
+    end
 
     respond_to do |format|
       format.html { get_collections and render :index }
@@ -70,6 +75,7 @@ class SuperAdmin::AdminsController < SuperAdmin::BaseController
 
         # Saving the admin object
         @admin.save
+        @trust = @admin.trust
 
         # Setting the flash message
         message = translate("forms.created_successfully", :item => "Admin")

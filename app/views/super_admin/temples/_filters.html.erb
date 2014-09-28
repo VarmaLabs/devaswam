@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-xs-4">
-    <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Temple"), new_admin_temple_path, :class=>"btn btn-warning", :remote=>true %>
+    <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Temple"), new_super_admin_temple_path, :class=>"btn btn-warning", :remote=>true %>
   </div><!-- /.col-xs-6 -->
 
   <div class="col-xs-8">
 
-    <%= form_for Temple.new, :url => admin_temples_path, :method => :get, :remote=>true, :html=>{:class=>"pull-right", :style=>"m-bottom:0px;"} do |f| %>
+    <%= form_for Temple.new, :url => super_admin_temples_path, :method => :get, :remote=>true, :html=>{:class=>"pull-right", :style=>"m-bottom:0px;"} do |f| %>
 
     <div class="input-group">
       <input type="text" name="query" placeholder="Search Temples ..." class="form-control">

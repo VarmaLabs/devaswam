@@ -14,31 +14,23 @@
 
     <div class="col-md-8">
       <div class="heading1"><%= @trust.name %></div>
-      <div class="heading2"><%= @trust.address %></div>
     </div>
   </div>
 
-  <%= content_tag :h3, "About the Trust", :class=>"heading" %>
+  <div class="cl-20"></div>
+
+  <div class="palette-footer ml-10">
+    <%= link_to raw("<i class=\"icon-pencil icon-white mr--5\"></i> Edit"), edit_super_admin_trust_path(@trust), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
+    <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), super_admin_trust_path(@trust), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right", :remote=>true %>
+    <div class="cl-10"></div>
+  </div>
+
   <hr>
+
+  <%= content_tag :h3, "About the Trust", :class=>"heading mb-20" %>
   <div class='italic m-10'><%= simple_format(@trust.description.blank? ? "Description not available" : @trust.description) %></div>
 
-  <div class="cl-20"></div>
-
-  <%= content_tag :h3, "Admin", :class=>"heading" %>
-  <hr>
-  <% @trust.admins.each do |admin| %>
-    <div class="row pb-10">
-      <div class="col-md-2 visible-md visible-lg" style="padding-left:0px;padding-right:0px">
-        <%= display_image(admin, :photo, "75%") %>
-      </div>
-      <div class="col-md-10">
-        <%= link_to admin.name, super_admin_admin_path(admin), :class=>"heading3" %><br/>
-        <div class="content"><%= admin.address if admin.address %></div>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="cl-20"></div>
+  <%= content_tag :h3, "Details", :class=>"heading" %>
 
   <table class="table table-condensed table-hover table-striped mt-20">
     <tbody>
@@ -65,10 +57,39 @@
     </tbody>
   </table>
 
-	<div class="palette-footer ml-10">
-    <%= link_to raw("<i class=\"icon-pencil icon-white mr--5\"></i> Edit"), edit_super_admin_trust_path(@trust), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
-    <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), super_admin_trust_path(@trust), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right", :remote=>true %>
-    <div class="cl-10"></div>
-  </div>
+  <%= content_tag :h3, "Admin", :class=>"heading pull-left" %>
+  <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Admin"), new_super_admin_admin_path(called_from: "trust_show", trust_id: @trust.id), :class=>"btn btn-xs btn-warning pull-right mb-20 mt-10", :remote=>true %>
+  <div class="cl"></div>
+  <hr>
+
+  <% @trust.admins.each do |admin| %>
+    <div class="row pb-10">
+      <div class="col-md-2 visible-md visible-lg" style="padding-left:0px;padding-right:0px">
+        <%= display_image(admin, :photo, "75%") %>
+      </div>
+      <div class="col-md-10">
+        <%= link_to admin.name, super_admin_admin_path(admin), :class=>"heading3" %><br/>
+        <div class="content"><%= admin.address if admin.address %></div>
+      </div>
+    </div>
+  <% end %>
+
+
+  <%= content_tag :h3, "Temples", :class=>"heading pull-left" %>
+  <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Temple"), new_super_admin_temple_path(called_from: "trust_show", trust_id: @trust.id), :class=>"btn btn-xs btn-warning pull-right mb-20 mt-10", :remote=>true %>
+  <div class="cl"></div>
+  <hr>
+
+  <% @trust.temples.each do |temple| %>
+    <div class="row pb-10">
+      <div class="col-md-2 visible-md visible-lg" style="padding-left:0px;padding-right:0px">
+        <%= display_image(temple, :photo, "75%") %>
+      </div>
+      <div class="col-md-10">
+        <%= link_to temple.name, super_admin_temple_path(temple), :class=>"heading3" %><br/>
+        <div class="content"><%= scrap_word(temple.description, 200) if temple.description %></div>
+      </div>
+    </div>
+  <% end %>
 
 </div>

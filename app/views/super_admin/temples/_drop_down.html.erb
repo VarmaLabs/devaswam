@@ -4,7 +4,7 @@
   </button>
   <ul class="dropdown-menu" role="menu">
     <% @temples.each do |temple| %>
-      <li><%= link_to temple.name, admin_temple_path(temple), :remote=>true %></li>
+      <li><%= link_to temple.name, super_admin_temple_path(temple), :remote=>true %></li>
     <% end %>
     <%= content_tag :li, link_to_next_page(@temples, 'Next Page', :remote => true) %>
     <%= content_tag :li, link_to_previous_page(@temples, 'Previous Page', :remote => true) %>

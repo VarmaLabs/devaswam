@@ -1,8 +1,7 @@
-class Admin::TemplesController < ApplicationController
+class SuperAdmin::TemplesController < SuperAdmin::BaseController
 
-  #before_filter :require_user
-  #authorize_actions_for Item, :actions => {:index => :delete}
-  before_filter :set_navs, :parse_pagination_params, :only=>:index
+  before_filter :parse_pagination_params, :only=>:index
+  before_filter :set_navs
 
   # GET /temples
   # GET /temples.js
@@ -38,6 +37,11 @@ class Admin::TemplesController < ApplicationController
     ## Intitializing the temple object
     @temple = Temple.new
 
+    if params[:trust_id]
+      @trust = Trust.find_by_id(params[:trust_id])
+      @temple.trust = @trust
+    end
+
     respond_to do |format|
       format.html { get_collections and render :index }
       format.json { render json: @temple }
@@ -72,13 +76,14 @@ class Admin::TemplesController < ApplicationController
 
         # Saving the temple object
         @temple.save
+        @trust = @temple.trust
 
         # Setting the flash message
         message = translate("forms.created_successfully", :item => "Temple")
         store_flash_message(message, :success)
 
         format.html {
-          redirect_to admin_temple_url(@temple), notice: message
+          redirect_to super_admin_temple_url(@temple), notice: message
         }
         format.json { render json: @temple, status: :created, location: @temple }
         format.js {}
@@ -119,7 +124,7 @@ class Admin::TemplesController < ApplicationController
         store_flash_message(message, :success)
 
         format.html {
-          redirect_to admin_temple_url(@temple), notice: message
+          redirect_to super_admin_temple_url(@temple), notice: message
         }
         format.json { head :no_content }
         format.js {}
@@ -161,7 +166,7 @@ class Admin::TemplesController < ApplicationController
       store_flash_message(message, :success)
 
       format.html {
-        redirect_to admin_temples_url notice: message
+        redirect_to super_admin_temples_url notice: message
       }
       format.json { head :no_content }
       format.js {}
@@ -172,7 +177,7 @@ class Admin::TemplesController < ApplicationController
   private
 
   def set_navs
-    set_nav("Temple")
+    set_nav("Manage Temples")
   end
 
   def get_collections
@@ -195,7 +200,7 @@ class Admin::TemplesController < ApplicationController
   end
 
   def temple_params
-    params.require(:temple).permit(:name, :description, :trust_id)
+    params.require(:temple).permit(:name, :trust_id, :description)
   end
 
 end

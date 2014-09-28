@@ -5,12 +5,13 @@ Rails.application.routes.draw do
   namespace(:super_admin){
     resources :admins
     resources :trusts
+    resources :temples
+    resources :deities
   }
 
-  namespace(:admin){
-    resources :deities
-    resources :temples
-  }
+  #namespace(:admin){
+
+  #}
 
   # Sign In URLs for super admin users
   get     'super_admin/sign_in'         => "super_admin/sessions#sign_in",         :as => :super_admin_sign_in

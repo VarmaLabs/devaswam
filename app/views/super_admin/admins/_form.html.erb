@@ -9,6 +9,7 @@
 
     <%= hidden_field_tag :faction, @admin.new_record? ? super_admin_admins_path : super_admin_admins_path(@admin) %>
     <%= hidden_field_tag :fmethod, @admin.new_record? ? "POST" : "PUT" %>
+    <%= hidden_field_tag :called_from, params[:called_from] if params[:called_from] %>
 
     <div class="form-inputs">
 
@@ -42,21 +43,34 @@
                                               :input_type=>'email',
                                               :required=>true,
                                               :place_holder=>"e.g: Put a suitable example here."} %>
-      <div class="form-inputs">
-
-        <!-- Trust (Drop Down) -->
-        <div class="form-group ">
-          <label for="inp_product" class="col-md-4 control-label">Choose a Trust
-            <span class="text-color-red margin-left-10 margin-right-5 pull-right">*</span>
-          </label>
-          <div class="col-md-8">
-            <%= collection_select(:admin, :trust_id, Trust.select("id, name").all, :id, :name, {:prompt=>true}, {:class => 'form-control required', :id=>"inp_product"}) %>
+      <% if params[:called_from] && @trust && @trust.id %>
+        <div class="form-inputs">
+          <!-- Trust (Drop Down) -->
+          <div class="form-group ">
+            <label for="inp_product" class="col-md-4 control-label">Choose a Trust
+              <span class="text-color-red ml-10 pull-right">*</span>
+            </label>
+            <div class="col-md-8">
+              <%= @admin.trust.name %>
+            </div>
           </div>
-        </div>
-
-      </div><!-- /.form-inputs -->
-
+        </div><!-- /.form-inputs -->
+        <%= hidden_field_tag "admin[trust_id]", @trust.id %>
+      <% else %>
+        <div class="form-inputs">
+          <!-- Trust (Drop Down) -->
+          <div class="form-group ">
+            <label for="inp_product" class="col-md-4 control-label">Choose a Trust
+              <span class="text-color-red ml-10 pull-right">*</span>
+            </label>
+            <div class="col-md-8">
+              <%= collection_select(:admin, :trust_id, Trust.select("id, name").all, :id, :name, {:prompt=>true}, {:class => 'form-control required', :id=>"inp_trust"}) %>
+            </div>
+          </div>
+        </div><!-- /.form-inputs -->
+      <% end %>
       <!-- Password (string) -->
+
       <%= render :partial=>"field", :locals=>{:object=>@admin,
                                               :object_name=>'admin',
                                               :field_name=>'password',

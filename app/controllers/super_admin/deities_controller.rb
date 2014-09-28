@@ -1,8 +1,7 @@
-class Admin::DeitiesController < ApplicationController
+class SuperAdmin::DeitiesController < SuperAdmin::BaseController
 
-  #before_filter :require_user
-  #authorize_actions_for Item, :actions => {:index => :delete}
-  before_filter :set_navs, :parse_pagination_params, :only=>:index
+  before_filter :parse_pagination_params, :only=>:index
+  before_filter :set_navs
 
   # GET /deities
   # GET /deities.js
@@ -38,6 +37,11 @@ class Admin::DeitiesController < ApplicationController
     ## Intitializing the deity object
     @deity = Deity.new
 
+    if params[:temple_id]
+      @temple = Temple.find_by_id(params[:temple_id])
+      @deity.temple = @temple
+    end
+
     respond_to do |format|
       format.html { get_collections and render :index }
       format.json { render json: @deity }
@@ -64,6 +68,12 @@ class Admin::DeitiesController < ApplicationController
     ## Creating the deity object
     @deity = Deity.new(deity_params)
 
+    if params[:deity] && params[:deity][:temple_id]
+      @temple = Temple.find_by_id(params[:deity][:temple_id])
+      @deity.temple = @temple
+      @deity.trust = @temple.trust
+    end
+
     ## Validating the data
     @deity.valid?
 
@@ -78,7 +88,7 @@ class Admin::DeitiesController < ApplicationController
         store_flash_message(message, :success)
 
         format.html {
-          redirect_to admin_deity_url(@deity), notice: message
+          redirect_to super_admin_deity_url(@deity), notice: message
         }
         format.json { render json: @deity, status: :created, location: @deity }
         format.js {}
@@ -119,7 +129,7 @@ class Admin::DeitiesController < ApplicationController
         store_flash_message(message, :success)
 
         format.html {
-          redirect_to admin_deity_url(@deity), notice: message
+          redirect_to super_admin_deity_url(@deity), notice: message
         }
         format.json { head :no_content }
         format.js {}
@@ -161,7 +171,7 @@ class Admin::DeitiesController < ApplicationController
       store_flash_message(message, :success)
 
       format.html {
-        redirect_to admin_deities_url notice: message
+        redirect_to super_admin_deities_url notice: message
       }
       format.json { head :no_content }
       format.js {}
@@ -172,7 +182,7 @@ class Admin::DeitiesController < ApplicationController
   private
 
   def set_navs
-    set_nav("Deity")
+    set_nav("Manage Deities")
   end
 
   def get_collections

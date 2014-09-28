@@ -13,3 +13,5 @@ body { padding: 5px; }
 
 .dropdown-menu.align-right {left: -65%;}
 .box .row {margin: 0px !important}
+
+hr {margin: 0px; padding-bottom: 10px;}

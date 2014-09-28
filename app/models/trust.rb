@@ -21,6 +21,7 @@ class Trust < ActiveRecord::Base
 
   # Associations
   has_many :admins
+  has_many :temples
 
   state_machine :status, :initial => :inactive do
 

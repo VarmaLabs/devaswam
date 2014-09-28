@@ -1,0 +1,66 @@
+
+<%# Displays a detailed view of the temple %>
+<%# Display Flash Message if any only in case of ajax request %>
+<% if request.xhr? %>
+	<%= render :partial=>"layouts/common/flash_message" %>
+<% end %>
+
+<div class="box p-10">
+
+  <div class="row">
+    <div class="col-md-3">
+      <%= display_image(@temple, :photo, "100%") %>
+    </div>
+
+    <div class="col-md-9">
+      <div class="heading1"><%= @temple.name %></div>
+      <div class="heading2"><%= link_to @temple.trust.name, super_admin_trust_path(@temple.trust), class: "text-color-red" %></div>
+    </div>
+  </div>
+
+  <div class="cl-20"></div>
+
+  <div class="palette-footer ml-10">
+    <%= link_to raw("<i class=\"icon-pencil icon-white mr--5\"></i> Edit"), edit_super_admin_temple_path(@temple), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
+    <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), super_admin_temple_path(@temple), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right", :remote=>true %>
+    <div class="cl-10"></div>
+  </div>
+
+  <div class="cl-20"></div>
+
+  <%= content_tag :h3, "About the Temple", :class=>"heading" %>
+  <hr>
+  <div class='italic m-10'><%= simple_format(@temple.description.blank? ? "Description not available" : @temple.description) %></div>
+
+  <%= content_tag :h3, "Details", :class=>"heading" %>
+  <table class="table table-condensed table-hover table-striped mt-20">
+    <tbody>
+      <tr>
+        <td class="bold" style="width:30%;">Created at</td>
+        <td><%= display_time(@temple.created_at, "text-color-grey") %></td>
+      </tr>
+      <tr>
+        <td class="bold" style="width:30%;">Last updated at</td>
+        <td><%= display_time(@temple.updated_at, "text-color-grey") %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= content_tag :h3, "Deities", :class=>"heading pull-left" %>
+  <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Deity"), new_super_admin_deity_path(called_from: "trust_show", temple_id: @temple.id), :class=>"btn btn-xs btn-warning pull-right mb-20 mt-10", :remote=>true %>
+  <div class="cl"></div>
+  <hr>
+
+  <% @temple.deities.each do |deity| %>
+    <div class="row pb-10">
+      <div class="col-md-2 visible-md visible-lg" style="padding-left:0px;padding-right:0px">
+        <%= display_image(deity, :photo, "75%") %>
+      </div>
+      <div class="col-md-10">
+        <%= link_to deity.name, super_admin_deity_path(deity), :class=>"heading3" %><br/>
+        <div class="content"><%= scrap_word(deity.description, 140) if deity.description %></div>
+      </div>
+    </div>
+  <% end %>
+
+</div>
