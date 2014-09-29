@@ -1,22 +1,22 @@
 
 <%# Renders a partial which is used to create a new admin %>
 
-<%= form_for([:super_admin, @admin], :html => {:id=>"form_admin", :class=>"mb-0 form-horizontal", :role => "form", :method => (@admin.new_record? ? :post : :put), :remote=>true}) do |f| %>
+<%= form_for([:super_admin, @trust_admin], :html => {:id=>"form_admin", :class=>"mb-0 form-horizontal", :role => "form", :method => (@trust_admin.new_record? ? :post : :put), :remote=>true}) do |f| %>
 
   <div class="modal-body">
 
-    <%= @admin.errors[:base].to_sentence %>
+    <%= @trust_admin.errors[:base].to_sentence %>
 
-    <%= hidden_field_tag :faction, @admin.new_record? ? super_admin_admins_path : super_admin_admins_path(@admin) %>
-    <%= hidden_field_tag :fmethod, @admin.new_record? ? "POST" : "PUT" %>
+    <%= hidden_field_tag :faction, @trust_admin.new_record? ? super_admin_trust_admins_path : super_admin_trust_admins_path(@trust_admin) %>
+    <%= hidden_field_tag :fmethod, @trust_admin.new_record? ? "POST" : "PUT" %>
     <%= hidden_field_tag :called_from, params[:called_from] if params[:called_from] %>
 
     <div class="form-inputs">
 
 
       <!-- Name (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@admin,
-                                              :object_name=>'admin',
+      <%= render :partial=>"field", :locals=>{:object=>@trust_admin,
+                                              :object_name=>'trust_admin',
                                               :field_name=>'name',
                                               :display_name=>'Name',
                                               :field_type=>'string',
@@ -25,8 +25,8 @@
                                               :place_holder=>"e.g: Put a suitable example here."} %>
 
       <!-- Username (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@admin,
-                                              :object_name=>'admin',
+      <%= render :partial=>"field", :locals=>{:object=>@trust_admin,
+                                              :object_name=>'trust_admin',
                                               :field_name=>'username',
                                               :display_name=>'Username',
                                               :field_type=>'string',
@@ -35,8 +35,8 @@
                                               :place_holder=>"e.g: Put a suitable example here."} %>
 
       <!-- Email (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@admin,
-                                              :object_name=>'admin',
+      <%= render :partial=>"field", :locals=>{:object=>@trust_admin,
+                                              :object_name=>'trust_admin',
                                               :field_name=>'email',
                                               :display_name=>'Email',
                                               :field_type=>'string',
@@ -51,11 +51,11 @@
               <span class="text-color-red ml-10 pull-right">*</span>
             </label>
             <div class="col-md-8">
-              <%= @admin.trust.name %>
+              <%= @trust_admin.trust.name %>
             </div>
           </div>
         </div><!-- /.form-inputs -->
-        <%= hidden_field_tag "admin[trust_id]", @trust.id %>
+        <%= hidden_field_tag "trust_admin[trust_id]", @trust.id %>
       <% else %>
         <div class="form-inputs">
           <!-- Trust (Drop Down) -->
@@ -64,15 +64,15 @@
               <span class="text-color-red ml-10 pull-right">*</span>
             </label>
             <div class="col-md-8">
-              <%= collection_select(:admin, :trust_id, Trust.select("id, name").all, :id, :name, {:prompt=>true}, {:class => 'form-control required', :id=>"inp_trust"}) %>
+              <%= collection_select(:trust_admin, :trust_id, Trust.select("id, name").all, :id, :name, {:prompt=>true}, {:class => 'form-control required', :id=>"inp_trust"}) %>
             </div>
           </div>
         </div><!-- /.form-inputs -->
       <% end %>
       <!-- Password (string) -->
 
-      <%= render :partial=>"field", :locals=>{:object=>@admin,
-                                              :object_name=>'admin',
+      <%= render :partial=>"field", :locals=>{:object=>@trust_admin,
+                                              :object_name=>'trust_admin',
                                               :field_name=>'password',
                                               :display_name=>'Password',
                                               :field_type=>'string',
@@ -81,8 +81,8 @@
                                               :place_holder=>"Enter a Password"} %>
 
       <!-- Confirm Password (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@admin,
-                                              :object_name=>'admin',
+      <%= render :partial=>"field", :locals=>{:object=>@trust_admin,
+                                              :object_name=>'trust_admin',
                                               :field_name=>'password_confirmation',
                                               :display_name=>'Password Confirmation',
                                               :field_type=>'string',
@@ -91,8 +91,8 @@
                                               :place_holder=>"Retype Password"} %>
 
       <!-- Phone (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@admin,
-                                              :object_name=>'admin',
+      <%= render :partial=>"field", :locals=>{:object=>@trust_admin,
+                                              :object_name=>'trust_admin',
                                               :field_name=>'phone',
                                               :display_name=>'Phone',
                                               :field_type=>'string',
@@ -101,8 +101,8 @@
                                               :place_holder=>"e.g: Put a suitable example here."} %>
 
       <!-- Address (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@admin,
-                                              :object_name=>'admin',
+      <%= render :partial=>"field", :locals=>{:object=>@trust_admin,
+                                              :object_name=>'trust_admin',
                                               :field_name=>'address',
                                               :display_name=>'Address',
                                               :field_type=>'string',
@@ -117,11 +117,11 @@
   <div class="modal-footer">
 
     <div class="pull-right">
-      <% button_text = "#{@admin.new_record? ? "Create" : "Update"} Item" %>
-			<%# if @admin.new_record? %>
+      <% button_text = "#{@trust_admin.new_record? ? "Create" : "Update"} Item" %>
+			<%# if @trust_admin.new_record? %>
 				<%#= link_to "Cancel", "#", :class => "btn", :remote=>true %>
 			<%# else %>
-				<%#= link_to 'Back', super_admin_admins_path, :class=>"btn ml-10", :remote => true unless @admin.new_record? %>
+				<%#= link_to 'Back', super_admin_admins_path, :class=>"btn ml-10", :remote => true unless @trust_admin.new_record? %>
 			<%# end %>
       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       <%= submit_tag button_text, "data-reset-text"=>button_text, "data-loading-text"=>"Saving ...", :class=>"btn btn-primary ml-10" %>

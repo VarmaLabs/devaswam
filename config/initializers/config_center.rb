@@ -83,7 +83,7 @@ module ConfigCenter
     EXCLUDED_JSON_ATTRIBUTES = [:password_digest, :status]
   end
 
-  module Admin
+  module TrustAdmin
 
     INACTIVE = "inactive"
     ACTIVE = "active"

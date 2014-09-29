@@ -1,6 +1,6 @@
-class CreateAdmins < ActiveRecord::Migration
+class CreateTrustAdmins < ActiveRecord::Migration
   def self.up
-    create_table :admins do |t|
+    create_table :trust_admins do |t|
       t.string :name
       t.string :username
       t.string :status
@@ -15,6 +15,6 @@ class CreateAdmins < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :admins
+    drop_table :trust_admins
   end
 end

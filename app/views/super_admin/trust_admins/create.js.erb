@@ -1,0 +1,30 @@
+<% if @trust_admin.errors.blank? %>
+
+  <% if params[:called_from] && params[:called_from] == "trust_show" %>
+    // Reload the right box to reflect the newly added trust_admin details
+    $('#div_trust_details').html("<%= escape_javascript(render(:partial=>'super_admin/trusts/show')) %>");
+  <% else %>
+    // Fill the right box with first trust_admin details
+    $('#div_trust_admin_details').html("<%= escape_javascript(render(:partial=>'show')) %>");
+
+    // Add the newly created item to the list
+    $("#div_trust_admin_collections").prepend("<div id=\"div_trust_admin_<%= @trust_admin.id %>\"><%= escape_javascript(render(:partial => 'item', :locals => { :trust_admin => @trust_admin })) %></div>")
+    $("#div_trust_admin_empty").hide();
+  <% end %>
+
+  // Close Modal
+  closeModal();
+
+<% else %>
+
+  // Show the new form in the pop up form.
+  heading = "Create Admin";
+  bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
+  showModal(heading, bodyContent);
+  validateAdminForm();
+
+  // Populate Server Side Errors
+  errorMessages = <%= @trust_admin.errors.full_messages.to_json.html_safe %>;
+  populateServerSideErrors('trust_admin', errorMessages);
+
+<% end %>

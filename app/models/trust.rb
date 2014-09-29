@@ -7,7 +7,7 @@ class Trust < ActiveRecord::Base
       :maximum => ConfigCenter::GeneralValidations::NAME_MAX_LEN},
       :format => {:with => ConfigCenter::GeneralValidations::NAME_FORMAT_REG_EXP}
 
-  validates :status, :presence=> true, :inclusion => { :in => ConfigCenter::Admin::STATUS_LIST.keys }
+  validates :status, :presence=> true, :inclusion => { :in => ConfigCenter::Trust::STATUS_LIST.keys }
 
   validates :email,
     :uniqueness => {:case_sensitive => false},
@@ -20,7 +20,7 @@ class Trust < ActiveRecord::Base
       :maximum => ConfigCenter::Trust::ADDRESS_MAX_LEN}
 
   # Associations
-  has_many :admins
+  has_many :trust_admins
   has_many :temples
 
   state_machine :status, :initial => :inactive do

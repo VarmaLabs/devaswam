@@ -1,4 +1,4 @@
-class Admin < ActiveRecord::Base
+class TrustAdmin < ActiveRecord::Base
 
   has_secure_password
 
@@ -19,7 +19,7 @@ class Admin < ActiveRecord::Base
       :maximum => ConfigCenter::GeneralValidations::USERNAME_MAX_LEN},
       :format => {:with => ConfigCenter::GeneralValidations::USERNAME_FORMAT_REG_EXP}
 
-  validates :status, :presence=> true, :inclusion => { :in => ConfigCenter::Admin::STATUS_LIST.keys }
+  validates :status, :presence=> true, :inclusion => { :in => ConfigCenter::TrustAdmin::STATUS_LIST.keys }
 
   validates :email,
     :presence => true,
@@ -87,13 +87,13 @@ class Admin < ActiveRecord::Base
   def as_json(options={})
     exclusion_list = []
     exclusion_list += ConfigCenter::Defaults::EXCLUDED_JSON_ATTRIBUTES
-    exclusion_list += ConfigCenter::Admin::EXCLUDED_JSON_ATTRIBUTES
+    exclusion_list += ConfigCenter::TrustAdmin::EXCLUDED_JSON_ATTRIBUTES
     options[:except] ||= exclusion_list
     super(options)
   end
 
   def display_status
-    ConfigCenter::Admin::STATUS_LIST[status]
+    ConfigCenter::TrustAdmin::STATUS_LIST[status]
   end
 
 

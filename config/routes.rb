@@ -3,15 +3,15 @@ Rails.application.routes.draw do
   root :to => 'welcome#index'
 
   namespace(:super_admin){
-    resources :admins
+    resources :trust_admins
     resources :trusts
     resources :temples
     resources :deities
   }
 
-  #namespace(:admin){
+  namespace(:trust_admin){
 
-  #}
+  }
 
   # Sign In URLs for super admin users
   get     'super_admin/sign_in'         => "super_admin/sessions#sign_in",         :as => :super_admin_sign_in
@@ -19,6 +19,13 @@ Rails.application.routes.draw do
   delete  'super_admin/sign_out'        => "super_admin/sessions#sign_out",        :as => :super_admin_sign_out
 
   get     'super_admin/home'           => "super_admin/home#index",                :as => :super_admin_home
+
+  # Sign In URLs for trust admin users
+  get     'trust_admin/sign_in'         => "trust_admin/sessions#sign_in",         :as => :trust_admin_sign_in
+  post    'trust_admin/create_session'  => "trust_admin/sessions#create_session",  :as => :trust_admin_create_session
+  delete  'trust_admin/sign_out'        => "trust_admin/sessions#sign_out",        :as => :trust_admin_sign_out
+
+  get     'trust_admin/home'           => "trust_admin/home#index",                :as => :trust_admin_home
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

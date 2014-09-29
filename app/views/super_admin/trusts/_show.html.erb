@@ -58,18 +58,18 @@
   </table>
 
   <%= content_tag :h3, "Admin", :class=>"heading pull-left" %>
-  <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Admin"), new_super_admin_admin_path(called_from: "trust_show", trust_id: @trust.id), :class=>"btn btn-xs btn-warning pull-right mb-20 mt-10", :remote=>true %>
+  <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Admin"), new_super_admin_trust_admin_path(called_from: "trust_show", trust_id: @trust.id), :class=>"btn btn-xs btn-warning pull-right mb-20 mt-10", :remote=>true %>
   <div class="cl"></div>
   <hr>
 
-  <% @trust.admins.each do |admin| %>
+  <% @trust.trust_admins.each do |ta| %>
     <div class="row pb-10">
       <div class="col-md-2 visible-md visible-lg" style="padding-left:0px;padding-right:0px">
-        <%= display_image(admin, :photo, "75%") %>
+        <%= display_image(ta, :photo, "75%") %>
       </div>
       <div class="col-md-10">
-        <%= link_to admin.name, super_admin_admin_path(admin), :class=>"heading3" %><br/>
-        <div class="content"><%= admin.address if admin.address %></div>
+        <%= link_to ta.name, super_admin_trust_admin_path(ta), :class=>"heading3" %><br/>
+        <div class="content"><%= ta.address if ta.address %></div>
       </div>
     </div>
   <% end %>

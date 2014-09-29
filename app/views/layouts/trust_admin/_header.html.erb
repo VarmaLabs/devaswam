@@ -2,41 +2,41 @@
   <h3 class="text-muted pull-left">Devaswam</h3>
   <ul class="nav nav-pills pull-right">
 
-    <% if @current_super_admin %>
+    <% if @current_trust_admin %>
       <li class="<%= nav_class("Home") %>">
-        <%= link_to raw("Home"), super_admin_home_path %>
+        <%= link_to raw("Home"), trust_admin_home_path %>
       </li>
 
       <li class="<%= nav_class("Manage Trusts") %>">
-        <%= link_to raw("Manage Trusts"), super_admin_trusts_path %>
+        <%= link_to raw("Manage Trusts"), trust_admin_trusts_path %>
       </li>
 
       <li class="<%= nav_class("Manage Admin") %>">
-        <%= link_to raw("Manage Admin"), super_admin_trust_admins_path %>
+        <%= link_to raw("Manage Admin"), trust_admin_admins_path %>
       </li>
 
       <li class="<%= nav_class("Manage Temples") %>">
-        <%= link_to raw("Manage Temples"), super_admin_temples_path %>
+        <%= link_to raw("Manage Temples"), trust_admin_temples_path %>
       </li>
 
       <li class="<%= nav_class("Manage Deities") %>">
-        <%= link_to raw("Manage Deities"), super_admin_deities_path %>
+        <%= link_to raw("Manage Deities"), trust_admin_deities_path %>
       </li>
 
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @current_super_admin.name %> <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @current_trust_admin.name %> <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li class="dropdown-header">Profile</li>
           <li><a href="#">Update Profile</a></li>
           <li><a href="#">Profile Settings</a></li>
           <li><a href="#">Notifications Settings</a></li>
           <li class="divider"></li>
-          <li><%= link_to raw("Sign Out"), super_admin_sign_out_path, method: :delete %></li>
+          <li><%= link_to raw("Sign Out"), trust_admin_sign_out_path, method: :delete %></li>
         </ul>
       </li>
     <% else %>
       <li class="<%= nav_class("Manage Trusts") %>">
-        <%= link_to raw("Sign In"), super_admin_sign_in_path %>
+        <%= link_to raw("Sign In"), trust_admin_sign_in_path %>
       </li>
     <% end %>
 
