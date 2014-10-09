@@ -1,0 +1,125 @@
+
+<%# Renders a partial which is used to create a new offering %>
+
+<%= form_for([:trust_admin, @offering], :html => {:id=>"form_offering", :class=>"mb-0 form-horizontal", :role => "form", :method => (@offering.new_record? ? :post : :put), :remote=>true}) do |f| %>
+
+  <div class="modal-body">
+
+    <%= @offering.errors[:base].to_sentence %>
+
+    <%= hidden_field_tag :faction, @offering.new_record? ? trust_admin_offerings_path : trust_admin_offerings_path(@offering) %>
+    <%= hidden_field_tag :fmethod, @offering.new_record? ? "POST" : "PUT" %>
+
+    <div class="form-inputs">
+
+      @deity = <%= @deity.id %>
+
+      <!-- Name (string) -->
+      <%= render :partial=>"field", :locals=>{:object=>@offering,
+                                              :object_name=>'offering',
+                                              :field_name=>'name',
+                                              :display_name=>'Name',
+                                              :field_type=>'string',
+                                              :input_type=>'text',
+                                              :required=>true,
+                                              :place_holder=>"e.g: Put a suitable example here."} %>
+
+      <!-- Temple (integer) -->
+      <% if @deity && @deity.id %>
+        <div class="form-inputs">
+
+          <div class="form-group ">
+            <label for="inp_temple" class="col-md-4 control-label">Temple
+              <span class="text-color-red ml-10 pull-right">*</span>
+            </label>
+            <div class="col-md-8">
+              <%= @deity.temple.name %>
+            </div>
+          </div>
+        </div><!-- /.form-inputs -->
+
+        <div class="form-inputs">
+          <div class="form-group ">
+            <label for="inp_temple" class="col-md-4 control-label">Deity
+              <span class="text-color-red ml-10 pull-right">*</span>
+            </label>
+            <div class="col-md-8">
+              <%= @deity.name %>
+            </div>
+          </div>
+        </div><!-- /.form-inputs -->
+
+        <%= hidden_field_tag "deity_id", @deity.id %>
+
+      <% end %>
+
+      <!-- Price (float) -->
+      <%= render :partial=>"field", :locals=>{:object=>@offering,
+                                              :object_name=>'offering',
+                                              :field_name=>'price',
+                                              :display_name=>'Price (in Rs)',
+                                              :field_type=>'float',
+                                              :input_type=>'text',
+                                              :required=>true,
+                                              :place_holder=>"e.g: 25."} %>
+      <!-- Devaswam Share (float) -->
+      <%= render :partial=>"field", :locals=>{:object=>@offering,
+                                              :object_name=>'offering',
+                                              :field_name=>'devaswam_share',
+                                              :display_name=>'Devaswam Share (in Rs)',
+                                              :field_type=>'float',
+                                              :input_type=>'text',
+                                              :required=>true,
+                                              :place_holder=>"e.g: 10."} %>
+      <!-- Shanti Share (float) -->
+      <%= render :partial=>"field", :locals=>{:object=>@offering,
+                                              :object_name=>'offering',
+                                              :field_name=>'shanti_share',
+                                              :display_name=>'Shanti Share (in Rs)',
+                                              :field_type=>'float',
+                                              :input_type=>'text',
+                                              :required=>true,
+                                              :place_holder=>"e.g: 10."} %>
+      <!-- Kazhakam Share (float) -->
+      <%= render :partial=>"field", :locals=>{:object=>@offering,
+                                              :object_name=>'offering',
+                                              :field_name=>'kazhakam_share',
+                                              :display_name=>'Kazhakam Share (in Rs)',
+                                              :field_type=>'float',
+                                              :input_type=>'text',
+                                              :required=>true,
+                                              :place_holder=>"e.g: 5."} %>
+
+      <!-- Notes (string) -->
+      <%= render :partial=>"field", :locals=>{:object=>@offering,
+                                              :object_name=>'offering',
+                                              :field_name=>'notes',
+                                              :display_name=>'Notes',
+                                              :field_type=>'string',
+                                              :input_type=>'text',
+                                              :required=>false,
+                                              :place_holder=>"e.g: Put a suitable example here."} %>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+    <div class="pull-right">
+      <% button_text = "#{@offering.new_record? ? "Create" : "Update"} Item" %>
+			<%# if @offering.new_record? %>
+				<%#= link_to "Cancel", "#", :class => "btn", :remote=>true %>
+			<%# else %>
+				<%#= link_to 'Back', trust_admin_offerings_path, :class=>"btn ml-10", :remote => true unless @offering.new_record? %>
+			<%# end %>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      <%= submit_tag button_text, "data-reset-text"=>button_text, "data-loading-text"=>"Saving ...", :class=>"btn btn-primary ml-10" %>
+    </div>
+
+  </div>
+
+	<div class="cl-10"></div>
+
+<% end %>
+

@@ -1,0 +1,28 @@
+<ul class="nav nav-pills nav-stacked">
+
+  <li class="<%= nav_class("Home") %>">
+    <%= link_to raw("Home"), super_admin_home_path %>
+  </li>
+
+  <li class="nav-header disabled mt-30"><a>Manage</a></li>
+
+  <li class="<%= nav_class("Manage Trusts") %>">
+    <%= link_to raw("Trusts"), super_admin_trusts_path %>
+  </li>
+
+  <li class="<%= nav_class("Manage Trust Admin") %>">
+    <%= link_to raw("Trust Admin"), super_admin_trust_admins_path %>
+  </li>
+
+  <li class="<%= nav_class("Manage Temples") %>">
+    <%= link_to raw("Temples"), super_admin_temples_path %>
+  </li>
+
+  <li class="<%= nav_class("Manage Deities") %>">
+    <%= link_to raw("Deities"), super_admin_deities_path %>
+  </li>
+
+  <li class="nav-header disabled mt-30"><a>Settings</a></li>
+
+</ul>
+

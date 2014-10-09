@@ -1,0 +1,4 @@
+status:
+  internal_server_error: "500 Something went wrong"
+  forbidden: "403 Permission Denied! You don't have permission to perform this action"
+  not_found: "404 Not Found: We don't have what you are looking for"

@@ -60,6 +60,10 @@ class TrustAdmin < ActiveRecord::Base
 
   end
 
+  def display_name
+    unicode_name || name
+  end
+
   # return an active record relation object with the search query in its where clause
   # Return the ActiveRecord::Relation object
   # == Examples
@@ -96,6 +100,28 @@ class TrustAdmin < ActiveRecord::Base
     ConfigCenter::TrustAdmin::STATUS_LIST[status]
   end
 
+  def self.authenticate(login_handle, password)
+    trust_admin = TrustAdmin.where("LOWER(email) = LOWER('#{login_handle}') OR LOWER(username) = LOWER('#{login_handle}')").first
+    authenticated = false
+    # If the user exists with the given username / password
+    if trust_admin
+      # Check if the password matches
+      # Invalid Login: Password / Username doesn't match
+      if trust_admin.authenticate(password) == false
+        heading = I18n.translate("authentication.error")
+        alert = I18n.translate("authentication.invalid_login")
+      end
+      # If successfully authenticated.
+      heading = I18n.translate("authentication.success")
+      alert = I18n.translate("authentication.logged_in_successfully")
+      authenticated = true
+    # If the user with provided email doesn't exist
+    else
+      heading = I18n.translate("authentication.error")
+      alert = I18n.translate("authentication.user_not_found")
+    end
+    return authenticated, trust_admin, heading, alert
+  end
 
   include StateMachinesScopes
 

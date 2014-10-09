@@ -11,7 +11,7 @@ class TrustAdmin::SessionsController < TrustAdmin::BaseController
   def create_session
 
     # Fetching the user data (email / username is case insensitive.)
-    @authenticated, @trust_admin, @heading, @alert = SuperAdmin.authenticate(params[:login_handle], params[:password])
+    @authenticated, @trust_admin, @heading, @alert = TrustAdmin.authenticate(params[:login_handle], params[:password])
 
     if @authenticated
       store_flash_message("#{@heading}: #{@alert}", :success)

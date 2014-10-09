@@ -4,7 +4,7 @@
   </button>
   <ul class="dropdown-menu" role="menu">
     <% @deities.each do |deity| %>
-      <li><%= link_to deity.name, super_admin_deity_path(deity), :remote=>true %></li>
+      <li><%= link_to deity.display_name, super_admin_deity_path(deity), :remote=>true %></li>
     <% end %>
     <%= content_tag :li, link_to_next_page(@deities, 'Next Page', :remote => true) %>
     <%= content_tag :li, link_to_previous_page(@deities, 'Previous Page', :remote => true) %>

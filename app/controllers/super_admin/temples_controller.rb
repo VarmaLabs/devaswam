@@ -200,7 +200,7 @@ class SuperAdmin::TemplesController < SuperAdmin::BaseController
   end
 
   def temple_params
-    params.require(:temple).permit(:name, :trust_id, :description)
+    params.require(:temple).permit(:name, :unicode_name, :trust_id, :description)
   end
 
 end

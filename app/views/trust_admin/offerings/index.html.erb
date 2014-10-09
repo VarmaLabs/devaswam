@@ -1,0 +1,22 @@
+
+<div class="cl-10 hidden-xs"></div>
+
+<%# Displays to Manage the items %>
+<div class="row mb-10">
+	<div class="fs-22 col-sm-6 hidden-xs">Manage Offerings of <%= @deity.name %></div>
+	<div class="fs-22 col-sm-6 text-align-center visible-xs">Manage Offerings of <%= @deity.name %></div>
+	<div id="div_offering_filters" class="col-sm-6 hidden-xs">
+		<%= render :partial=>"filters" %>
+	</div>
+</div>
+
+<div class="cl-10 hidden-xs"></div>
+
+<%# Renders a partial to display all the offerings %>
+<div class="row">
+	<div id="div_offering_index" class="col-sm-12">
+		<%= render :partial=>"index" %>
+	</div>
+</div>
+
+

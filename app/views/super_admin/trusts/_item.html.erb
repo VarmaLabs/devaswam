@@ -6,7 +6,7 @@
       <%= display_image(trust, :photo, "100%") %>
     </div>
     <div class="col-md-9">
-      <%= link_to trust.name, super_admin_trust_path(trust), :remote=>true, :class=>"heading3" %><br/>
+      <%= link_to trust.display_name, super_admin_trust_path(trust), :remote=>true, :class=>"heading3" %><br/>
 
       <div class="content"><%= scrap_word(trust.description, 100) %></div>
 

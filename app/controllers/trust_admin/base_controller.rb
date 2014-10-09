@@ -6,7 +6,7 @@ class TrustAdmin::BaseController < ApplicationController
   protected
 
   def current_trust_admin
-    @current_trust_admin = SuperAdmin.find_by_id(session[:trust_admin_id])
+    @current_trust_admin ||= TrustAdmin.find_by_id(session[:trust_admin_id])
   end
 
   def store_session

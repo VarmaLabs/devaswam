@@ -13,6 +13,11 @@ class Deity < ActiveRecord::Base
   # Associations
   belongs_to :temple
   belongs_to :trust
+  has_many :offerings
+
+  def display_name
+    unicode_name || name
+  end
 
   # return an active record relation object with the search query in its where clause
   # Return the ActiveRecord::Relation object

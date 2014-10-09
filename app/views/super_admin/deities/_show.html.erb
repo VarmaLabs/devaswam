@@ -13,8 +13,8 @@
     </div>
 
     <div class="col-md-9">
-      <div class="heading1"><%= @deity.name %></div>
-      <div class="heading2"><%= link_to @deity.temple.name, super_admin_temple_path(@deity.temple), class: "text-color-red" %></div>
+      <div class="heading1"><%= @deity.display_name %></div>
+      <div class="heading2"><%= link_to @deity.temple.display_name, super_admin_temple_path(@deity.temple), class: "text-color-red" %></div>
     </div>
   </div>
 

@@ -1,0 +1,21 @@
+<% if @offering.errors.blank? %>
+
+	// Refresh the updated item in the list
+  $("#tr_offering_<%= @offering.id %>").html("<%= escape_javascript(render :partial => 'item', :locals => { :offering => @offering }) %>")
+
+  // Close Modal
+  closeModal();
+
+<% else %>
+
+  // Show the new form in the pop up form.
+  heading = "Edit Offering";
+  bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
+  showModal(heading, bodyContent);
+  validateOfferingForm();
+
+  // Populate Server Side Errors
+  errorMessages = <%= @offering.errors.full_messages.to_json.html_safe %>;
+  populateServerSideErrors('offering', errorMessages);
+
+<% end %>

@@ -13,8 +13,8 @@
     </div>
 
     <div class="col-md-9">
-      <div class="heading1"><%= @trust_admin.name %></div>
-      <div><%= link_to @trust_admin.trust.name, super_admin_trust_path(@trust_admin.trust), :class=>"text-color-red" if @trust_admin.trust %><br/></div>
+      <div class="heading1"><%= @trust_admin.display_name %></div>
+      <div><%= link_to @trust_admin.trust.display_name, super_admin_trust_path(@trust_admin.trust), :class=>"text-color-red" if @trust_admin.trust %><br/></div>
     </div>
   </div>
 
@@ -61,6 +61,24 @@
     </tbody>
   </table>
 
+  <% if @trust_admin.trust && @trust_admin.trust.temples && @trust_admin.trust.temples.size >= 1 %>
+
+    <%= content_tag :h3, "Temples", :class=>"heading pull-left" %>
+    <div class="cl"></div>
+    <hr>
+
+    <% @trust_admin.trust.temples.each do |temple| %>
+      <div class="row pb-10">
+        <div class="col-md-2 visible-md visible-lg" style="padding-left:0px;padding-right:0px">
+          <%= display_image(temple, :photo, "75%") %>
+        </div>
+        <div class="col-md-10">
+          <%= link_to temple.display_name, super_admin_temple_path(temple), :class=>"heading3" %><br/>
+          <div class="content"><%= scrap_word(temple.description, 200) if temple.description %></div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 
 
 </div>

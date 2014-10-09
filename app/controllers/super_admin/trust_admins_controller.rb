@@ -65,7 +65,7 @@ class SuperAdmin::TrustAdminsController < SuperAdmin::BaseController
   # POST /trust_admins.json
   def create
     ## Creating the trust admin object
-    @trust_admin = TrustAdmin.new(admin_params)
+    @trust_admin = TrustAdmin.new(trust_admin_params)
 
     ## Validating the data
     @trust_admin.valid?
@@ -107,7 +107,7 @@ class SuperAdmin::TrustAdminsController < SuperAdmin::BaseController
     @trust_admin = TrustAdmin.find(params[:id])
 
     ## Updating the @trust_admin object with params
-    @trust_admin.assign_attributes(admin_params)
+    @trust_admin.assign_attributes(trust_admin_params)
 
     ## Validating the data
     @trust_admin.valid?
@@ -176,7 +176,7 @@ class SuperAdmin::TrustAdminsController < SuperAdmin::BaseController
   private
 
   def set_navs
-    set_nav("Manage Admin")
+    set_nav("Manage Trust Admin")
   end
 
   def get_collections
@@ -198,8 +198,8 @@ class SuperAdmin::TrustAdminsController < SuperAdmin::BaseController
 
   end
 
-  def admin_params
-    params.require(:admin).permit(:name, :username, :status, :email, :phone, :address, :trust_id, :password, :password_confirmation)
+  def trust_admin_params
+    params.require(:trust_admin).permit(:name, :unicode_name, :username, :status, :email, :phone, :address, :trust_id, :password, :password_confirmation)
   end
 
 end

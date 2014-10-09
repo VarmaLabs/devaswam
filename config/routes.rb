@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  namespace(:trust_admin){ resources :offerings }
   root :to => 'welcome#index'
 
   namespace(:super_admin){
@@ -10,7 +11,9 @@ Rails.application.routes.draw do
   }
 
   namespace(:trust_admin){
-
+    resources :deities do
+      resources :offerings
+    end
   }
 
   # Sign In URLs for super admin users

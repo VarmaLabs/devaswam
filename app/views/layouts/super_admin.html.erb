@@ -27,7 +27,7 @@
 			to improve your experience.</p>
 		<![endif]-->
 
-    <div class="container header-block clearfix">
+    <div class="container-fluid header-block clearfix">
 			<div id="div_page_header">
       	<%= render :partial=>"/layouts/super_admin/header" -%>
 			</div>
@@ -41,8 +41,17 @@
 			<%= render :partial=>"/layouts/common/flash_message" -%>
 		</div>
 
-    <div class="container pt-10" style="min-height:400px;">
-      <%= yield %>
+    <div class="container-fluid pt-10" style="min-height:400px;">
+
+      <div class="row ">
+        <div class="col-md-2">
+          <%= render :partial=>"/layouts/super_admin/left_nav" -%>
+        </div>
+        <div class="col-md-10">
+          <%= yield %>
+        </div>
+      </div>
+
     </div>
 
 		<%#* Display Footer -%>

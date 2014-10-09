@@ -13,8 +13,8 @@
     </div>
 
     <div class="col-md-9">
-      <div class="heading1"><%= @temple.name %></div>
-      <div class="heading2"><%= link_to @temple.trust.name, super_admin_trust_path(@temple.trust), class: "text-color-red" %></div>
+      <div class="heading1"><%= @temple.display_name %></div>
+      <div class="heading2"><%= link_to @temple.trust.display_name, super_admin_trust_path(@temple.trust), class: "text-color-red" %></div>
     </div>
   </div>
 
@@ -57,7 +57,7 @@
         <%= display_image(deity, :photo, "75%") %>
       </div>
       <div class="col-md-10">
-        <%= link_to deity.name, super_admin_deity_path(deity), :class=>"heading3" %><br/>
+        <%= link_to deity.display_name, super_admin_deity_path(deity), :class=>"heading3" %><br/>
         <div class="content"><%= scrap_word(deity.description, 140) if deity.description %></div>
       </div>
     </div>

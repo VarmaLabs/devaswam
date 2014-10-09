@@ -40,6 +40,10 @@ class SuperAdmin < ActiveRecord::Base
                                             LOWER(email) LIKE LOWER('%#{query}%') OR")
                         }
 
+  def display_name
+    unicode_name || name
+  end
+
   # FIX ME - Specs need to be written
   def self.find_by_email_or_username(query)
     self.where("LOWER(email) = LOWER('#{query}') OR LOWER(username) = LOWER('#{query}')").first

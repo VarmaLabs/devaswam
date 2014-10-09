@@ -1,7 +1,7 @@
 PATH
   remote: /Users/kvarma/Projects/VarmaLabs/OpenSource/humdrum
   specs:
-    humdrum-rails (0.1.2)
+    humdrum-rails (0.1.3)
       colorize (~> 0.7, >= 0.7.3)
 
 PATH

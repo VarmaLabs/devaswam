@@ -24,6 +24,15 @@
                                               :required=>true,
                                               :place_holder=>"e.g: Put a suitable example here."} %>
 
+      <%= render :partial=>"field", :locals=>{:object=>@deity,
+                                              :object_name=>'deity',
+                                              :field_name=>'unicode_name',
+                                              :display_name=>'Unicode Name',
+                                              :field_type=>'string',
+                                              :input_type=>'text',
+                                              :required=>false,
+                                              :place_holder=>"e.g: Kshetrapalan."} %>
+
       <!-- Temple (integer) -->
       <% if params[:called_from] && @temple && @temple.id %>
         <div class="form-inputs">
@@ -33,7 +42,7 @@
               <span class="text-color-red ml-10 pull-right">*</span>
             </label>
             <div class="col-md-8">
-              <%= @deity.temple.name %>
+              <%= @deity.temple.display_name %>
             </div>
           </div>
         </div><!-- /.form-inputs -->
@@ -46,7 +55,7 @@
               <span class="text-color-red margin-left-10 margin-right-5 pull-right">*</span>
             </label>
             <div class="col-md-8">
-              <%= collection_select(:deity, :temple_id, Temple.select("id, name").all, :id, :name, {:prompt=>true}, {:class => 'form-control required', :id=>"inp_temple"}) %>
+              <%= collection_select(:deity, :temple_id, Temple.select("id, name, unicode_name").all, :id, :display_name, {:prompt=>true}, {:class => 'form-control required', :id=>"inp_temple"}) %>
             </div>
           </div>
 

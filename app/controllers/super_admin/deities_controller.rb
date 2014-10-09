@@ -205,7 +205,7 @@ class SuperAdmin::DeitiesController < SuperAdmin::BaseController
   end
 
   def deity_params
-    params.require(:deity).permit(:name, :description, :temple_id, :trust_id)
+    params.require(:deity).permit(:name, :unicode_name, :description, :temple_id, :trust_id)
   end
 
 end

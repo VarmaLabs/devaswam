@@ -13,7 +13,7 @@
     </div>
 
     <div class="col-md-8">
-      <div class="heading1"><%= @trust.name %></div>
+      <div class="heading1"><%= @trust.display_name %></div>
     </div>
   </div>
 
@@ -68,7 +68,7 @@
         <%= display_image(ta, :photo, "75%") %>
       </div>
       <div class="col-md-10">
-        <%= link_to ta.name, super_admin_trust_admin_path(ta), :class=>"heading3" %><br/>
+        <%= link_to ta.display_name, super_admin_trust_admin_path(ta), :class=>"heading3" %><br/>
         <div class="content"><%= ta.address if ta.address %></div>
       </div>
     </div>
@@ -86,7 +86,7 @@
         <%= display_image(temple, :photo, "75%") %>
       </div>
       <div class="col-md-10">
-        <%= link_to temple.name, super_admin_temple_path(temple), :class=>"heading3" %><br/>
+        <%= link_to temple.display_name, super_admin_temple_path(temple), :class=>"heading3" %><br/>
         <div class="content"><%= scrap_word(temple.description, 200) if temple.description %></div>
       </div>
     </div>

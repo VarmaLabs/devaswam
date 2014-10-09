@@ -6,7 +6,7 @@ class SuperAdmin::BaseController < ApplicationController
   protected
 
   def current_super_admin
-    @current_super_admin = SuperAdmin.find_by_id(session[:super_admin_id])
+    @current_super_admin ||= SuperAdmin.find_by_id(session[:super_admin_id])
   end
 
   def store_session

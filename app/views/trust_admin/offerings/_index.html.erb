@@ -1,0 +1,29 @@
+<%# Displays list of @offerings %>
+<table id="table_offering_collections" class="table table-striped table-hover">
+  <tr>
+    <th style="width:20%;text-align:left;">Name</th>
+    <th style="width:8%;text-align:left;">Price</th>
+    <th style="width:8%;text-align:left;">Devaswam</th>
+    <th style="width:8%;text-align:left;">Shanti</th>
+    <th style="width:8%;text-align:left;">Kazhakam</th>
+    <th style="text-align:center;">Notes</th>
+    <th style="width:20%;text-align:center;">Action</th>
+  </tr>
+  <% @offerings.each do |offering| %>
+    <tr id="tr_offering_<%= offering.id %>">
+      <%= render :partial=>"item", :locals=>{:offering=>offering} %>
+    </tr>
+  <% end %>
+  <% if @offerings.blank? %>
+    <tr id="tr_offering_empty" class="text-color-grey p-80 text-align-center">
+      <td colspan="4"><%= translate("forms.no_results_found") %></td>
+    </tr>
+  <% end %>
+</table>
+
+<% if @offerings.any? %>
+   <%= content_tag :div, :class=>"pull-right" do %>
+     <%= paginate @offerings, :remote => true %>
+   <% end %>
+<% end %>
+<div class="cl"></div>

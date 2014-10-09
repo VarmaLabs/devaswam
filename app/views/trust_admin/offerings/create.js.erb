@@ -1,0 +1,21 @@
+<% if @offering.errors.blank? %>
+
+	// Add the newly created item to the list
+  $("#table_offering_collections > tbody > tr").eq(0).after("<tr id='tr_offering_<%= @offering.id %>'><%= escape_javascript(render(:partial => 'item', :locals => { :offering => @offering })) %>")
+
+  // Close Modal
+  closeModal();
+
+<% else %>
+
+  // Show the new form in the pop up form.
+  heading = "Create Offering";
+  bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
+  showModal(heading, bodyContent);
+  validateOfferingForm();
+
+  // Populate Server Side Errors
+  errorMessages = <%= @offering.errors.full_messages.to_json.html_safe %>;
+  populateServerSideErrors('offering', errorMessages);
+
+<% end %>

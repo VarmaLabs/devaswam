@@ -4,7 +4,7 @@
   </button>
   <ul class="dropdown-menu" role="menu">
     <% @trust_admins.each do |ta| %>
-      <li><%= link_to ta.name, super_admin_trust_admin_path(ta), :remote=>true %></li>
+      <li><%= link_to ta.display_name, super_admin_trust_admin_path(ta), :remote=>true %></li>
     <% end %>
     <%= content_tag :li, link_to_next_page(@trust_admins, 'Next Page', :remote => true) %>
     <%= content_tag :li, link_to_previous_page(@trust_admins, 'Previous Page', :remote => true) %>

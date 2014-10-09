@@ -194,7 +194,7 @@ class SuperAdmin::TrustsController < SuperAdmin::BaseController
   end
 
   def trust_params
-    params.require(:trust).permit(:name, :status, :email, :phone, :address, :description)
+    params.require(:trust).permit(:name, :unicode_name, :status, :email, :phone, :address, :description)
   end
 
 end
