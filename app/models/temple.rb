@@ -12,6 +12,7 @@ class Temple < ActiveRecord::Base
   # Associations
   belongs_to :trust
   has_many :deities, class_name: 'Deity'
+  has_one  :temple_picture, :as => :imageable, :dependent => :destroy, :class_name => "Image::TemplePicture"
 
   def display_name
     unicode_name || name

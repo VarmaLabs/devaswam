@@ -2,8 +2,8 @@
 <div class="box hoverable p-10 box-border-black">
 
   <div class="row">
-    <div class="col-md-2 visible-md visible-lg">
-      <%= display_image(deity, :photo, "75%") %>
+    <div class="col-md-2 visible-md visible-lg" style="padding-left:0px;padding-right:0px">
+      <%= link_to display_thumbnail(deity, :deity_picture), super_admin_deity_path(deity), :remote=>true %>
     </div>
     <div class="col-md-10">
       <%= link_to deity.display_name, super_admin_deity_path(deity),

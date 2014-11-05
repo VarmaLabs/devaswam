@@ -18,5 +18,13 @@
  * require bootstrap-rails (Alternatively you can use the bootstrap3-rails gem)
  *= require bootstrap
  *= require overrides-bootstrap
+ *= require overrides-handy
 
  */
+
+body {font-size: 18px;}
+p {font-size: 18px;}
+.dropdown-menu > li > a {font-size: 18px;}
+
+.unicode-field-name {color : #898989;}
+.has-error .control-label .unicode-field-name {color : #DB6B69;}

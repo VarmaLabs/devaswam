@@ -32,6 +32,7 @@ class TrustAdmin < ActiveRecord::Base
    unless: Proc.new { |admin| admin.password.blank? }
 
   validates :trust, presence: true
+  has_one  :profile_picture, :as => :imageable, :dependent => :destroy, :class_name => "Image::ProfilePicture"
 
   # Associations
   belongs_to :trust

@@ -40,6 +40,9 @@ class SuperAdmin < ActiveRecord::Base
                                             LOWER(email) LIKE LOWER('%#{query}%') OR")
                         }
 
+  # Associations
+  has_one  :profile_picture, :as => :imageable, :dependent => :destroy, :class_name => "Image::ProfilePicture"
+
   def display_name
     unicode_name || name
   end

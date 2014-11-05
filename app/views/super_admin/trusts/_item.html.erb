@@ -2,10 +2,10 @@
 <div class="box hoverable p-10 box-border-black">
 
   <div class="row">
-    <div class="col-md-3 visible-md visible-lg" style="padding-left:0px;padding-right:0px">
-      <%= display_image(trust, :photo, "100%") %>
+    <div class="col-md-2 visible-md visible-lg" style="padding-left:0px;padding-right:0px">
+      <%= link_to display_thumbnail(trust, :trust_logo), super_admin_trust_path(trust), :remote=>true %>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-10">
       <%= link_to trust.display_name, super_admin_trust_path(trust), :remote=>true, :class=>"heading3" %><br/>
 
       <div class="content"><%= scrap_word(trust.description, 100) %></div>

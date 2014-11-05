@@ -6,7 +6,7 @@
 <td><%= offering.kazhakam_share %></td>
 <td><%= scrap_word(offering.notes, 160) %></td>
 <td>
-  <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), trust_admin_offering_path(offering), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right", :remote=>true %>
-  <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Edit"), edit_trust_admin_offering_path(offering), :class=>"btn btn-default btn-xs pull-right mr-10", :remote=>true %>
+  <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), trust_admin_offering_path(offering), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-sm pull-right", :remote=>true %>
+  <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Edit"), edit_trust_admin_offering_path(offering), :class=>"btn btn-default btn-sm pull-right mr-10", :remote=>true %>
 </td>
 

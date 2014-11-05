@@ -8,11 +8,14 @@
 <div class="box p-10">
 
   <div class="row">
-    <div class="col-md-4" style="padding-left:0px;padding-right:0px">
-      <%= display_image(@trust, :photo, "100%") %>
+    <div class="col-md-3" style="padding-left:0px;padding-right:0px">
+      <%= link_to display_thumbnail(@trust, :trust_logo),
+                  upload_image_link(@trust, super_admin_trust_path(@trust), :trust_logo),
+                  :remote => true %>
+      <%= link_to "Change Image", upload_image_link(@trust, super_admin_trust_path(@trust)), :remote => true, :style=>"font-size:12px;" %>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-9">
       <div class="heading1"><%= @trust.display_name %></div>
     </div>
   </div>
@@ -20,8 +23,8 @@
   <div class="cl-20"></div>
 
   <div class="palette-footer ml-10">
-    <%= link_to raw("<i class=\"icon-pencil icon-white mr--5\"></i> Edit"), edit_super_admin_trust_path(@trust), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
-    <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), super_admin_trust_path(@trust), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right", :remote=>true %>
+    <%= link_to raw("<i class=\"icon-pencil icon-white mr--5\"></i> Edit"), edit_super_admin_trust_path(@trust), :class=>"btn btn-default btn-sm pull-right ml-10", :remote=>true %>
+    <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), super_admin_trust_path(@trust), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-sm pull-right", :remote=>true %>
     <div class="cl-10"></div>
   </div>
 
@@ -58,14 +61,14 @@
   </table>
 
   <%= content_tag :h3, "Admin", :class=>"heading pull-left" %>
-  <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Admin"), new_super_admin_trust_admin_path(called_from: "trust_show", trust_id: @trust.id), :class=>"btn btn-xs btn-warning pull-right mb-20 mt-10", :remote=>true %>
+  <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Admin"), new_super_admin_trust_admin_path(called_from: "trust_show", trust_id: @trust.id), :class=>"btn btn-warning pull-right mb-20 mt-10", :remote=>true %>
   <div class="cl"></div>
   <hr>
 
   <% @trust.trust_admins.each do |ta| %>
     <div class="row pb-10">
       <div class="col-md-2 visible-md visible-lg" style="padding-left:0px;padding-right:0px">
-        <%= display_image(ta, :photo, "75%") %>
+        <%= link_to display_thumbnail(ta, :profile_picture), super_admin_trust_admin_path(ta) %>
       </div>
       <div class="col-md-10">
         <%= link_to ta.display_name, super_admin_trust_admin_path(ta), :class=>"heading3" %><br/>
@@ -76,7 +79,7 @@
 
 
   <%= content_tag :h3, "Temples", :class=>"heading pull-left" %>
-  <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Temple"), new_super_admin_temple_path(called_from: "trust_show", trust_id: @trust.id), :class=>"btn btn-xs btn-warning pull-right mb-20 mt-10", :remote=>true %>
+  <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Temple"), new_super_admin_temple_path(called_from: "trust_show", trust_id: @trust.id), :class=>"btn btn-warning pull-right mb-20 mt-10", :remote=>true %>
   <div class="cl"></div>
   <hr>
 

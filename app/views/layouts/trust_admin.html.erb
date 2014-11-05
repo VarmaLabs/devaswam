@@ -10,7 +10,7 @@
     <%= render :partial=>"/layouts/common/meta_tags" -%>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="icon" href="/assets/favicon.jpg" type="image/png">
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
 
     <%= stylesheet_link_tag "application", :media => "all" -%>
 
@@ -37,12 +37,25 @@
     </div>
 
 		<%#* Show flash messages if controller has set any. -%>
-		<div id="div_flash_message" class="container" >
+		<div id="div_flash_message" class="container-fluid" >
 			<%= render :partial=>"/layouts/common/flash_message" -%>
 		</div>
 
-    <div class="container pt-10" style="min-height:400px;">
-      <%= yield %>
+    <div class="container-fluid pt-10" style="min-height:400px;">
+      <div class="row ">
+        <% if @current_super_admin %>
+          <div class="col-md-2">
+            <%= render :partial=>"/layouts/trust_admin/left_nav" -%>
+          </div>
+          <div class="col-md-10">
+            <%= yield %>
+          </div>
+        <% else %>
+          <div class="col-md-12">
+            <%= yield %>
+          </div>
+        <% end %>
+      </div>
     </div>
 
 		<%#* Display Footer -%>

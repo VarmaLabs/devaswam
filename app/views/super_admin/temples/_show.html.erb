@@ -8,8 +8,11 @@
 <div class="box p-10">
 
   <div class="row">
-    <div class="col-md-3">
-      <%= display_image(@temple, :photo, "100%") %>
+    <div class="col-md-3" style="padding-left:0px;padding-right:0px">
+      <%= link_to display_thumbnail(@temple, :temple_picture),
+                  upload_image_link(@temple, super_admin_temple_path(@temple), :temple_picture),
+                  :remote => true %>
+      <%= link_to "Change Image", upload_image_link(@temple, super_admin_temple_path(@temple), :temple_picture), :remote => true, :style=>"font-size:12px;" %>
     </div>
 
     <div class="col-md-9">
@@ -21,8 +24,8 @@
   <div class="cl-20"></div>
 
   <div class="palette-footer ml-10">
-    <%= link_to raw("<i class=\"icon-pencil icon-white mr--5\"></i> Edit"), edit_super_admin_temple_path(@temple), :class=>"btn btn-default btn-xs pull-right ml-10", :remote=>true %>
-    <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), super_admin_temple_path(@temple), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right", :remote=>true %>
+    <%= link_to raw("<i class=\"icon-pencil icon-white mr--5\"></i> Edit"), edit_super_admin_temple_path(@temple), :class=>"btn btn-default btn-sm pull-right ml-10", :remote=>true %>
+    <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), super_admin_temple_path(@temple), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-sm pull-right", :remote=>true %>
     <div class="cl-10"></div>
   </div>
 
@@ -47,7 +50,7 @@
   </table>
 
   <%= content_tag :h3, "Deities", :class=>"heading pull-left" %>
-  <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Deity"), new_super_admin_deity_path(called_from: "trust_show", temple_id: @temple.id), :class=>"btn btn-xs btn-warning pull-right mb-20 mt-10", :remote=>true %>
+  <%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Deity"), new_super_admin_deity_path(called_from: "trust_show", temple_id: @temple.id), :class=>"btn btn-warning pull-right mb-20 mt-10", :remote=>true %>
   <div class="cl"></div>
   <hr>
 

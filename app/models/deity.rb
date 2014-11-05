@@ -14,6 +14,7 @@ class Deity < ActiveRecord::Base
   belongs_to :temple
   belongs_to :trust
   has_many :offerings
+  has_one  :deity_picture, :as => :imageable, :dependent => :destroy, :class_name => "Image::DeityPicture"
 
   def display_name
     unicode_name || name

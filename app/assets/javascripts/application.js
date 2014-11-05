@@ -15,12 +15,13 @@
 //
 //= require bootstrap.min
 //= require utilities
+//= require image_upload
 
-// 
+//
 // For jQery validations - http://jqueryvalidation.org/documentation/
 //= require jquery.validate
 //= require jquery.validate.additional-methods
-// 
+//
 // include validation init functions
 //= require_tree ./validations
 

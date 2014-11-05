@@ -22,6 +22,7 @@ class Trust < ActiveRecord::Base
   # Associations
   has_many :trust_admins
   has_many :temples
+  has_one  :trust_logo, :as => :imageable, :dependent => :destroy, :class_name => "Image::TrustLogo"
 
   state_machine :status, :initial => :inactive do
 
@@ -48,7 +49,7 @@ class Trust < ActiveRecord::Base
   end
 
   def display_name
-    unicode_name || name
+    unicode_name.present? ? unicode_name : name
   end
 
   # return an active record relation object with the search query in its where clause

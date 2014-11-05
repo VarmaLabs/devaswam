@@ -34,6 +34,8 @@ gem 'ruby-progressbar'
 # Helps to print colored texts to console
 gem "colorize"
 gem "jquery-validation-rails"
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development do
 

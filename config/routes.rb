@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :trusts
     resources :temples
     resources :deities
+    resources :images
   }
 
   namespace(:trust_admin){

@@ -17,8 +17,8 @@ function validateTrustForm() {
       errorElement: "span",
       errorClass: "help-block",
       messages: {
-        "trust[name]": "Please enter the name of the trust",
-        "trust[address]": "Please enter the address",
+        "trust[name]": "Please enter the name of the trust (ട്രസ്റ്റിന്റെ പേര് പൂരിപ്പിക്കുക)",
+        "trust[address]": "Please enter the address (ട്രസ്റ്റിന്റെ മേൽവിലാസം പൂരിപ്പിക്കുക)",
       },
       highlight: function(element) {
           $(element).parent().parent().addClass("has-error");
@@ -33,8 +33,8 @@ function validateTrustForm() {
 
           // Populating error message
           var errorMessage = errors == 1
-            ? 'You missed 1 field. It has been highlighted'
-            : 'You missed ' + errors + ' fields. They have been highlighted';
+            ? 'You missed 1 field. It has been highlighted. (ചുവപ്പ് നിറത്തിൽ രേഖപ്പെടുത്തിയവ ഒന്ന് കൂടി പരിശോധിക്കുവാൻ അഭ്യർത്ഥിക്കുന്നു)'
+            : 'You missed ' + errors + ' fields. Please review the highlighted fields. (ചുവപ്പ് നിറത്തിൽ രേഖപ്പെടുത്തിയവ ഒന്ന് കൂടി പരിശോധിക്കുവാൻ അഭ്യർത്ഥിക്കുന്നു)';
 
           // Removing the form error if it already exists
           $("#div_trust_js_validation_error").remove();
